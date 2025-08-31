@@ -208,6 +208,10 @@ cat > /etc/logrotate.d/maninfini-crm << EOF
 }
 EOF
 
+# Create logs directory
+mkdir -p /var/www/CRMMANINFINI/logs
+chown maninfini:maninfini /var/www/CRMMANINFINI/logs
+
 print_success "Log rotation configured"
 
 # Final setup

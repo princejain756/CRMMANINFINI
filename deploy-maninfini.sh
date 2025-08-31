@@ -33,12 +33,22 @@ print_error() {
 
 # Check if running as root
 if [ "$EUID" -eq 0 ]; then
-    print_warning "Running as root. This is not recommended for production."
-    read -p "Continue anyway? (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
+    print_warning "Running as root. For production, it's recommended to run as a regular user with sudo privileges."
+    print_status "However, since you're deploying to production, we'll proceed with proper security measures."
+    
+    # Create a production user if it doesn't exist
+    if ! id "maninfini" &>/dev/null; then
+        print_status "Creating production user 'maninfini'..."
+        useradd -m -s /bin/bash -d /var/www/CRMMANINFINI maninfini
+        usermod -aG docker maninfini
+        print_success "Production user 'maninfini' created"
+    else
+        print_success "Production user 'maninfini' already exists"
     fi
+    
+    # Set proper ownership
+    chown -R maninfini:maninfini /var/www/CRMMANINFINI
+    chmod 755 /var/www/CRMMANINFINI
 fi
 
 # Check dependencies
@@ -136,7 +146,7 @@ print_success "Secure passwords generated and updated in .env file."
 
 # Create systemd service file
 print_status "Creating systemd service for auto-startup..."
-sudo tee /etc/systemd/system/maninfini-crm.service > /dev/null << EOF
+tee /etc/systemd/system/maninfini-crm.service > /dev/null << EOF
 [Unit]
 Description=Maninfini Automation CRM
 Requires=docker.service
@@ -149,6 +159,9 @@ WorkingDirectory=$DEPLOY_DIR
 ExecStart=/usr/bin/docker-compose up -d
 ExecStop=/usr/bin/docker-compose down
 TimeoutStartSec=0
+User=maninfini
+Group=maninfini
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 [Install]
 WantedBy=multi-user.target
@@ -166,7 +179,7 @@ cat > backup.sh << 'EOF'
 #!/bin/bash
 # Backup script for Maninfini CRM
 
-BACKUP_DIR="/opt/maninfini-crm/backups"
+BACKUP_DIR="/var/www/CRMMANINFINI/backups"
 DATE=$(date +%Y%m%d_%H%M%S)
 
 mkdir -p "$BACKUP_DIR"
