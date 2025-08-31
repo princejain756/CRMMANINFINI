@@ -1,15 +1,12 @@
 services:
   server:
-    # Build a lightweight custom image that reuses the
-    # official server image and overlays our built front.
+    # Build a lightweight custom image from the official one
+    # and patch the built index.html OG tags + logo.
     build:
       context: ../..
-      dockerfile: packages/twenty-docker/twenty/Dockerfile.front-overlay
-      args:
-        REACT_APP_SERVER_BASE_URL: ${SERVER_URL}
+      dockerfile: packages/twenty-docker/twenty/Dockerfile.patch-html
     image: maninfini/twenty:maninfini
 
   worker:
-    # Worker doesn't need the frontend; reuse the same
-    # final image for consistency.
+    # Reuse the same patched image for consistency.
     image: maninfini/twenty:maninfini

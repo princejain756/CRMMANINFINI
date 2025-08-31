@@ -1,0 +1,21 @@
+FROM twentycrm/twenty:latest as base
+
+USER 0
+
+# Copy branded image into the served "front" folder
+COPY --chown=1000:1000 packages/twenty-front/public/images/maninfini-logo.png \
+  /app/packages/twenty-server/dist/front/images/maninfini-logo.png
+
+# Patch Open Graph and Twitter meta tags in the built index.html
+RUN set -eux; \
+  INDEX=/app/packages/twenty-server/dist/front/index.html; \
+  sed -i 's|property="og:title" content="[^"]*"|property="og:title" content="Maninfini automation"|g' "$INDEX"; \
+  sed -i 's|name="twitter:title" content="[^"]*"|name="twitter:title" content="Maninfini automation"|g' "$INDEX"; \
+  sed -i 's|name="description" content="[^"]*"|name="description" content="A modern solution for business"|g' "$INDEX" || true; \
+  sed -i 's|property="og:description" content="[^"]*"|property="og:description" content="A modern solution for business"|g' "$INDEX"; \
+  sed -i 's|name="twitter:description" content="[^"]*"|name="twitter:description" content="A modern solution for business"|g' "$INDEX"; \
+  sed -i 's|property="og:image" content="[^"]*"|property="og:image" content="https://crm.maninfini.com/images/maninfini-logo.png"|g' "$INDEX"; \
+  sed -i 's|name="twitter:image" content="[^"]*"|name="twitter:image" content="https://crm.maninfini.com/images/maninfini-logo.png"|g' "$INDEX";
+
+USER 1000
+
