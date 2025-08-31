@@ -4,7 +4,7 @@ FROM node:24-alpine AS front-build
 WORKDIR /app
 
 # Required files to install dependencies for the workspace
-COPY ./package.json ./yarn.lock ./.yarnrc.yml ./tsconfig.base.json ./nx.json /app/
+COPY ./package.json ./yarn.lock ./.yarnrc.yml ./tsconfig.base.json ./nx.json ./.prettierrc /app/
 COPY ./.yarn/releases /app/.yarn/releases
 COPY ./.yarn/patches /app/.yarn/patches
 
@@ -43,4 +43,3 @@ COPY --from=front-build --chown=1000:1000 /app/packages/twenty-front/build/ /app
 USER 1000
 
 # Inherit entrypoint/cmd from base image
-
