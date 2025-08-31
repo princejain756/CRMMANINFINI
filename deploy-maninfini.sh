@@ -89,9 +89,10 @@ else
     git clone https://github.com/princejain756/CRMMANINFINI.git .
 fi
 
-# Copy docker-compose file
+# Copy docker-compose files
 print_status "Setting up Docker Compose configuration..."
 cp packages/twenty-docker/docker-compose.yml ./
+cp packages/twenty-docker/docker-compose.maninfini.yml ./
 
 # Create production environment file
 print_status "Creating production environment file..."
@@ -105,7 +106,7 @@ PG_DATABASE_HOST=db
 PG_DATABASE_PORT=5432
 
 # Server Configuration
-SERVER_URL=https://your-domain.com
+SERVER_URL=https://crm.maninfini.com
 NODE_PORT=3000
 
 # Redis Configuration
@@ -160,8 +161,8 @@ After=docker.service
 Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=$DEPLOY_DIR
-ExecStart=/usr/bin/docker-compose up -d
-ExecStop=/usr/bin/docker-compose down
+ExecStart=/usr/bin/docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml up -d
+ExecStop=/usr/bin/docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml down
 TimeoutStartSec=0
 User=maninfini
 Group=maninfini
@@ -206,9 +207,9 @@ echo "Updating Maninfini CRM..."
 git pull origin main
 
 echo "Rebuilding and restarting services..."
-docker-compose down
-docker-compose build --no-cache
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml down
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml build --no-cache
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml up -d
 
 echo "Update completed!"
 EOF
@@ -306,7 +307,7 @@ echo "Date: $(date)"
 echo ""
 
 echo "=== Docker Services ==="
-docker-compose ps
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml ps
 echo ""
 
 echo "=== Service Health ==="
@@ -325,14 +326,15 @@ df -h /opt/maninfini-crm
 echo ""
 
 echo "=== Recent Logs ==="
-docker-compose logs --tail=20 server
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml logs --tail=20 server
 EOF
 
 chmod +x monitor.sh
 
 # Start the services
-print_status "Starting Maninfini CRM services..."
-docker-compose up -d
+print_status "Building custom Maninfini image and starting services..."
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml build --no-cache
+docker-compose -f docker-compose.yml -f docker-compose.maninfini.yml up -d
 
 # Wait for services to be ready
 print_status "Waiting for services to be ready..."

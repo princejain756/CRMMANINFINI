@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  server:
+    # Build a custom image from this repository so the
+    # front-end index.html changes (OG tags) are included.
+    build:
+      context: ../..
+      dockerfile: packages/twenty-docker/twenty/Dockerfile
+      args:
+        REACT_APP_SERVER_BASE_URL: ${SERVER_URL}
+    image: maninfini/twenty:maninfini
+
+  worker:
+    build:
+      context: ../..
+      dockerfile: packages/twenty-docker/twenty/Dockerfile
+      args:
+        REACT_APP_SERVER_BASE_URL: ${SERVER_URL}
+    image: maninfini/twenty:maninfini
+
