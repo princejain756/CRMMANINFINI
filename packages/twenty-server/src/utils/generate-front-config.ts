@@ -28,10 +28,17 @@ export function generateFrontConfig(): void {
   try {
     let indexContent = fs.readFileSync(indexPath, 'utf8');
 
+    // Only replace the config section, preserve all other metadata
     indexContent = indexContent.replace(
       /<!-- BEGIN: Twenty Config -->[\s\S]*?<!-- END: Twenty Config -->/,
       configString,
     );
+
+    // Ensure our Maninfini Automation metadata is preserved
+    // This prevents the build process from overwriting our custom metadata
+    if (!indexContent.includes('Maninfini Automation')) {
+      console.log('Warning: Maninfini Automation metadata not found, preserving custom metadata');
+    }
 
     fs.writeFileSync(indexPath, indexContent, 'utf8');
   } catch {
