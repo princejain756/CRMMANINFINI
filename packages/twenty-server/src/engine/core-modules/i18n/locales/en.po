@@ -1530,9 +1530,9 @@ msgstr "Is Synced"
 msgid "Job Title"
 msgstr "Job Title"
 
-#. js-lingui-id: PviVyk
+#. js-lingui-id: ejmMLv
 #: src/engine/core-modules/workspace-invitation/services/workspace-invitation.service.ts
-msgid "Join your team on Twenty"
+msgid "Join your team on Maninfini Automation"
 msgstr "Join your team on Maninfini Automation"
 
 #. js-lingui-id: WNfJ8M
