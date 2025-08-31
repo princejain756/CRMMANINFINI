@@ -1,0 +1,46 @@
+# Stage 1: build only the frontend with your custom metadata
+FROM node:24-alpine AS front-build
+
+WORKDIR /app
+
+# Required files to install dependencies for the workspace
+COPY ./package.json ./yarn.lock ./.yarnrc.yml ./tsconfig.base.json ./nx.json /app/
+COPY ./.yarn/releases /app/.yarn/releases
+COPY ./.yarn/patches /app/.yarn/patches
+
+# Frontend + shared packages
+COPY ./packages/twenty-front/package.json /app/packages/twenty-front/
+COPY ./packages/twenty-ui/package.json /app/packages/twenty-ui/
+COPY ./packages/twenty-shared/package.json /app/packages/twenty-shared/
+
+RUN yarn && yarn cache clean && npx nx reset
+
+ARG REACT_APP_SERVER_BASE_URL
+ENV REACT_APP_SERVER_BASE_URL=${REACT_APP_SERVER_BASE_URL}
+
+# Add sources and build the front-end
+COPY ./packages/twenty-front /app/packages/twenty-front
+COPY ./packages/twenty-ui /app/packages/twenty-ui
+COPY ./packages/twenty-shared /app/packages/twenty-shared
+
+# Speed up front build and avoid any type/lint blocking
+ENV VITE_DISABLE_TYPESCRIPT_CHECKER=true \
+    VITE_DISABLE_ESLINT_CHECKER=true \
+    NODE_ENV=production
+
+RUN npx nx build twenty-front
+
+
+# Stage 2: reuse the official server image and overlay our built front
+FROM twentycrm/twenty:latest AS final
+
+# Need root to overwrite files in the image
+USER 0
+
+COPY --from=front-build --chown=1000:1000 /app/packages/twenty-front/build/ /app/packages/twenty-server/dist/front/
+
+# Drop back to the non-root user used by the base image
+USER 1000
+
+# Inherit entrypoint/cmd from base image
+

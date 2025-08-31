@@ -1,21 +1,15 @@
-version: "3.9"
-
 services:
   server:
-    # Build a custom image from this repository so the
-    # front-end index.html changes (OG tags) are included.
+    # Build a lightweight custom image that reuses the
+    # official server image and overlays our built front.
     build:
       context: ../..
-      dockerfile: packages/twenty-docker/twenty/Dockerfile
+      dockerfile: packages/twenty-docker/twenty/Dockerfile.front-overlay
       args:
         REACT_APP_SERVER_BASE_URL: ${SERVER_URL}
     image: maninfini/twenty:maninfini
 
   worker:
-    build:
-      context: ../..
-      dockerfile: packages/twenty-docker/twenty/Dockerfile
-      args:
-        REACT_APP_SERVER_BASE_URL: ${SERVER_URL}
+    # Worker doesn't need the frontend; reuse the same
+    # final image for consistency.
     image: maninfini/twenty:maninfini
-
