@@ -1533,7 +1533,7 @@ msgstr "Job Title"
 #. js-lingui-id: PviVyk
 #: src/engine/core-modules/workspace-invitation/services/workspace-invitation.service.ts
 msgid "Join your team on Twenty"
-msgstr "Join your team on Twenty"
+msgstr "Join your team on Maninfini Automation"
 
 #. js-lingui-id: WNfJ8M
 #: src/modules/connected-account/standard-objects/connected-account.workspace-entity.ts

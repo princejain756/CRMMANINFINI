@@ -217,7 +217,7 @@ const GENERATE_CALENDAR_EVENT_SEEDS = (): CalendarEventDataSeed[] => {
       ).toISOString(),
       description: TEMPLATE.description,
       location: LOCATION,
-      iCalUID: `event${INDEX}@calendar.twentycrm.com`,
+      iCalUID: `event${INDEX}@calendar.maninfini.com`,
       conferenceSolution: CONFERENCE_SOLUTION,
       conferenceLinkPrimaryLinkLabel: CONFERENCE_LINK,
       conferenceLinkPrimaryLinkUrl: CONFERENCE_LINK,
