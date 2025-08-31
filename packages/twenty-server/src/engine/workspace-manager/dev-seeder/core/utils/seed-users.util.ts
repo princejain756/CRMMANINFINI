@@ -31,7 +31,7 @@ export const seedUsers = async (dataSource: DataSource, schemaName: string) => {
         lastName: 'Maninfini',
         email: 'ad@maninfini.com',
         passwordHash:
-          '$2b$10$tYWwUfsHrlXu45DeZ4ZZdeH7Ocx834DvpszYwO/2WApKoppNqWULS', // maninfini
+          '$2b$10$UUJdRuUTyRTPHS60SnWyH.fx84vI6Lkpjr2KAa0mzIiFMMuje5C46', // Maninfini1manf
         canImpersonate: true,
         canAccessFullAdminPanel: true,
         isEmailVerified: true,
