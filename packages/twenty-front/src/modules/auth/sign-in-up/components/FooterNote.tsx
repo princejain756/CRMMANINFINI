@@ -20,9 +20,9 @@ const StyledContainer = styled.div`
 
 export const FooterNote = () => (
   <StyledContainer>
-    <Trans>By using Twenty, you agree to the</Trans>{' '}
+    <Trans>By using Maninfini, you agree to the</Trans>{' '}
     <a
-      href="https://twenty.com/legal/terms"
+      href="https://maninfini.com/terms-of-service"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -30,7 +30,7 @@ export const FooterNote = () => (
     </a>{' '}
     <Trans>and</Trans>{' '}
     <a
-      href="https://twenty.com/legal/privacy"
+      href="https://maninfini.com/privacy-policy"
       target="_blank"
       rel="noopener noreferrer"
     >
