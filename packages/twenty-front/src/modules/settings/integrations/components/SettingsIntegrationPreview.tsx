@@ -41,7 +41,7 @@ const StyledIntegrationLogo = styled.img`
   height: 100%;
 `;
 
-const StyledTwentyLogo = styled.img`
+const StyledManinfiniLogo = styled.img`
   height: ${({ theme }) => theme.spacing(12)};
   padding: ${({ theme }) => theme.spacing(2)};
 `;
@@ -67,7 +67,7 @@ export const SettingsIntegrationPreview = ({
           <StyledIntegrationLogo alt="" src={integrationLogoUrl} />
         </StyledIntegrationLogoContainer>
         <StyledSyncImage />
-        <StyledTwentyLogo alt="" src="/images/integrations/twenty-logo.svg" />
+        <StyledManinfiniLogo alt="" src="/images/maninfini-logo.png" />
       </StyledLogosContainer>
       <StyledLabel>Import your tables as remote objects</StyledLabel>
     </StyledCardContent>
