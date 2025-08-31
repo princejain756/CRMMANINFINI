@@ -8,8 +8,7 @@ import { SnackBarComponentInstanceContext } from '@/ui/feedback/snack-bar-manage
 import { ClickOutsideListenerContext } from '@/ui/utilities/pointer-event/contexts/ClickOutsideListenerContext';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { HelmetProvider } from 'react-helmet-async';
-import { Helmet } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { RecoilRoot } from 'recoil';
 import { IconsProvider } from 'twenty-ui/display';
 import { initialI18nActivate } from '~/utils/i18n/initialI18nActivate';
