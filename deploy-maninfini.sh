@@ -61,20 +61,18 @@ fi
 print_success "All dependencies are installed."
 
 # Create deployment directory
-DEPLOY_DIR="/opt/maninfini-crm"
+DEPLOY_DIR="/var/www/CRMMANINFINI"
 print_status "Creating deployment directory: $DEPLOY_DIR"
 sudo mkdir -p "$DEPLOY_DIR"
 cd "$DEPLOY_DIR"
 
 # Clone your repository
-if [ -d "CRMMANINFINI" ]; then
+if [ -d ".git" ]; then
     print_status "Repository already exists, pulling latest changes..."
-    cd CRMMANINFINI
     git pull origin main
 else
     print_status "Cloning your repository..."
-    git clone https://github.com/princejain756/CRMMANINFINI.git
-    cd CRMMANINFINI
+    git clone https://github.com/princejain756/CRMMANINFINI.git .
 fi
 
 # Copy docker-compose file
@@ -147,7 +145,7 @@ After=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=$DEPLOY_DIR/CRMMANINFINI
+WorkingDirectory=$DEPLOY_DIR
 ExecStart=/usr/bin/docker-compose up -d
 ExecStop=/usr/bin/docker-compose down
 TimeoutStartSec=0

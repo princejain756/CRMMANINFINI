@@ -143,8 +143,8 @@ fi
 
 # Create deployment directory
 print_status "Creating deployment directory..."
-mkdir -p /opt/maninfini-crm
-chown $SUDO_USER:$SUDO_USER /opt/maninfini-crm
+mkdir -p /var/www/CRMMANINFINI
+chown $SUDO_USER:$SUDO_USER /var/www/CRMMANINFINI
 
 # Set up swap file if needed
 print_status "Checking memory and setting up swap if needed..."
@@ -184,7 +184,7 @@ sysctl -p
 # Create system user for CRM
 print_status "Creating system user for CRM..."
 if ! id "maninfini" &>/dev/null; then
-    useradd -r -s /bin/bash -d /opt/maninfini-crm maninfini
+    useradd -r -s /bin/bash -d /var/www/CRMMANINFINI maninfini
     usermod -aG docker maninfini
     print_success "User 'maninfini' created"
 else
@@ -194,7 +194,7 @@ fi
 # Set up log rotation
 print_status "Setting up log rotation..."
 cat > /etc/logrotate.d/maninfini-crm << EOF
-/opt/maninfini-crm/logs/*.log {
+/var/www/CRMMANINFINI/logs/*.log {
     daily
     missingok
     rotate 52
@@ -238,7 +238,7 @@ print_success "🎉 Server setup completed successfully!"
 echo ""
 echo "📋 Next Steps:"
 echo "1. Log out and log back in for Docker group changes to take effect"
-echo "2. Navigate to /opt/maninfini-crm"
+echo "2. Navigate to /var/www/CRMMANINFINI"
 echo "3. Run the deployment script: ./deploy-maninfini.sh"
 echo ""
 echo "🔧 What was installed:"
@@ -253,7 +253,7 @@ echo ""
 echo "🌐 Your server is ready for Maninfini Automation CRM deployment!"
 echo ""
 echo "💡 Tip: You can now run:"
-echo "  cd /opt/maninfini-crm"
+echo "  cd /var/www/CRMMANINFINI"
 echo "  wget https://raw.githubusercontent.com/princejain756/CRMMANINFINI/main/deploy-maninfini.sh"
 echo "  chmod +x deploy-maninfini.sh"
 echo "  ./deploy-maninfini.sh"
