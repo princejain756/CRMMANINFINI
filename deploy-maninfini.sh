@@ -82,6 +82,10 @@ if [ -d ".git" ]; then
     git pull origin main
 else
     print_status "Cloning your repository..."
+    # Remove any existing files first
+    rm -rf * .[^.]* 2>/dev/null || true
+    
+    # Clone into current directory
     git clone https://github.com/princejain756/CRMMANINFINI.git .
 fi
 
