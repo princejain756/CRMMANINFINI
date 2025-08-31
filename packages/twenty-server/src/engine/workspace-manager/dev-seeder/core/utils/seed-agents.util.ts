@@ -153,7 +153,7 @@ const seedAgentChatMessages = async (
         threadId,
         role: AgentChatMessageRole.USER,
         content:
-          'What are the current startup trends and which companies in our portfolio are performing best?',
+          'What are the current automation trends and which companies in our portfolio are performing best?',
         createdAt: new Date(baseTime.getTime()),
       },
       {
@@ -161,7 +161,7 @@ const seedAgentChatMessages = async (
         threadId,
         role: AgentChatMessageRole.ASSISTANT,
         content:
-          'Hello! I can help you analyze startup trends and portfolio performance. From your YCombinator workspace data, I can see strong performance in AI/ML startups, particularly in the B2B SaaS space. Several companies are showing 40%+ month-over-month growth. Would you like me to provide specific company performance metrics or focus on broader industry trends?',
+          'Hello! I can help you analyze automation trends and portfolio performance. From your Maninfini Automation workspace data, I can see strong performance in automation startups, particularly in the B2B SaaS space. Several companies are showing 40%+ month-over-month growth. Would you like me to provide specific company performance metrics or focus on broader industry trends?',
         createdAt: new Date(baseTime.getTime() + 3 * 60 * 1000), // 3 minutes later
       },
       {
@@ -177,7 +177,7 @@ const seedAgentChatMessages = async (
         threadId,
         role: AgentChatMessageRole.ASSISTANT,
         content:
-          'Here are your top 5 performing portfolio companies: 1) TechFlow AI - 45% MoM growth, $2M ARR, 2) DataSync Pro - 38% MoM growth, $1.5M ARR, 3) CloudOps Solutions - 35% MoM growth, $3.2M ARR, 4) SecureNet - 32% MoM growth, $1.8M ARR, 5) HealthTech Plus - 28% MoM growth, $2.5M ARR. All are showing strong customer retention (>95%) and expanding market share. Would you like detailed breakdowns for any specific company?',
+          'Here are your top 5 performing portfolio companies: 1) AutoFlow Pro - 45% MoM growth, $2M ARR, 2) RoboSync Solutions - 38% MoM growth, $1.5M ARR, 3) CloudAutomation Hub - 35% MoM growth, $3.2M ARR, 4) SmartNet Systems - 32% MoM growth, $1.8M ARR, 5) ProcessTech Plus - 28% MoM growth, $2.5M ARR. All are showing strong customer retention (>95%) and expanding market share. Would you like detailed breakdowns for any specific company?',
         createdAt: new Date(baseTime.getTime() + 12 * 60 * 1000), // 12 minutes later
       },
     ];
@@ -220,10 +220,10 @@ export const seedAgents = async (
       'AI assistant for Apple workspace to help with tasks, insights, and workflow guidance';
   } else if (workspaceId === SEED_YCOMBINATOR_WORKSPACE_ID) {
     agentId = AGENT_DATA_SEED_IDS.YCOMBINATOR_DEFAULT_AGENT;
-    agentName = 'yc-ai-assistant';
-    agentLabel = 'YC AI Assistant';
+    agentName = 'maninfini-ai-assistant';
+    agentLabel = 'Maninfini AI Assistant';
     agentDescription =
-      'AI assistant for YCombinator workspace to help with tasks, insights, and workflow guidance';
+      'AI assistant for Maninfini Automation workspace to help with tasks, insights, and workflow guidance';
   } else {
     throw new Error(
       `Unsupported workspace ID for agent seeding: ${workspaceId}`,

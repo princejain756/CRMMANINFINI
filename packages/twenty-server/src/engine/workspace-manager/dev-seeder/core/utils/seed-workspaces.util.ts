@@ -54,10 +54,10 @@ export const seedWorkspaces = async ({
     },
     [SEED_YCOMBINATOR_WORKSPACE_ID]: {
       id: SEED_YCOMBINATOR_WORKSPACE_ID,
-      displayName: 'YCombinator',
-      subdomain: 'yc',
-      inviteHash: 'yc.dev-invite-hash',
-      logo: 'https://twentyhq.github.io/placeholder-images/workspaces/ycombinator-logo.png',
+      displayName: 'Maninfini Automation',
+      subdomain: 'maninfini',
+      inviteHash: 'maninfini.dev-invite-hash',
+      logo: '/images/maninfini-logo.png',
       activationStatus: WorkspaceActivationStatus.PENDING_CREATION, // will be set to active after default role creation
       version: version,
       isTwoFactorAuthenticationEnforced: false,

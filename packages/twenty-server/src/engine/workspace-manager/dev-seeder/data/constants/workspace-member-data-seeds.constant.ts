@@ -31,11 +31,11 @@ export const WORKSPACE_MEMBER_DATA_SEED_IDS = {
 export const WORKSPACE_MEMBER_DATA_SEEDS: WorkspaceMemberDataSeed[] = [
   {
     id: WORKSPACE_MEMBER_DATA_SEED_IDS.TIM,
-    nameFirstName: 'Tim',
-    nameLastName: 'Apple',
+    nameFirstName: 'Ad',
+    nameLastName: 'Maninfini',
     locale: 'en',
     colorScheme: 'Light',
-    userEmail: 'tim@apple.dev',
+    userEmail: 'ad@maninfini.com',
     userId: USER_DATA_SEED_IDS.TIM,
   },
   {

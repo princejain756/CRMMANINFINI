@@ -27,11 +27,11 @@ export const seedUsers = async (dataSource: DataSource, schemaName: string) => {
     .values([
       {
         id: USER_DATA_SEED_IDS.TIM,
-        firstName: 'Tim',
-        lastName: 'Apple',
-        email: 'tim@apple.dev',
+        firstName: 'Ad',
+        lastName: 'Maninfini',
+        email: 'ad@maninfini.com',
         passwordHash:
-          '$2b$10$3LwXjJRtLsfx4hLuuXhxt.3mWgismTiZFCZSG3z9kDrSfsrBl0fT6', // tim@apple.dev
+          '$2b$10$tYWwUfsHrlXu45DeZ4ZZdeH7Ocx834DvpszYwO/2WApKoppNqWULS', // maninfini
         canImpersonate: true,
         canAccessFullAdminPanel: true,
         isEmailVerified: true,

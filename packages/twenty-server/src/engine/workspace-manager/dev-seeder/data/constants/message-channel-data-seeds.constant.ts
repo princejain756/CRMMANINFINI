@@ -1,7 +1,7 @@
 import { CONNECTED_ACCOUNT_DATA_SEED_IDS } from 'src/engine/workspace-manager/dev-seeder/data/constants/connected-account-data-seeds.constant';
 import {
-  MessageChannelSyncStage,
-  MessageChannelVisibility,
+    MessageChannelSyncStage,
+    MessageChannelVisibility,
 } from 'src/modules/messaging/common/standard-objects/message-channel.workspace-entity';
 
 type MessageChannelDataSeed = {
@@ -56,7 +56,7 @@ export const MESSAGE_CHANNEL_DATA_SEEDS: MessageChannelDataSeed[] = [
     isContactAutoCreationEnabled: true,
     type: 'email',
     connectedAccountId: CONNECTED_ACCOUNT_DATA_SEED_IDS.TIM,
-    handle: 'tim@apple.dev',
+    handle: 'ad@maninfini.com',
     isSyncEnabled: true,
     visibility: MessageChannelVisibility.SHARE_EVERYTHING,
     syncStage: MessageChannelSyncStage.FULL_MESSAGE_LIST_FETCH_PENDING,
