@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Canonical domain
+Host: https://crm.maninfini.com
+
+# Sitemap location
+Sitemap: https://crm.maninfini.com/sitemap.xml

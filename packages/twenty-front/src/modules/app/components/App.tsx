@@ -32,7 +32,9 @@ export const App = () => {
               <ExceptionHandlerProvider>
                 <HelmetProvider>
                   <Helmet>
-                    <title>Maninfini Automation</title>
+                    <title>
+                      Maninfini Automation: Automation CRM for Your Business
+                    </title>
                   </Helmet>
                   <ClickOutsideListenerContext.Provider
                     value={{ excludedClickOutsideId: undefined }}

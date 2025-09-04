@@ -6,16 +6,27 @@ USER 0
 COPY --chown=1000:1000 packages/twenty-front/public/images/maninfini-logo.png \
   /app/packages/twenty-server/dist/front/images/maninfini-logo.png
 
+# Also copy robots and sitemap for SEO
+COPY --chown=1000:1000 packages/twenty-front/public/robots.txt \
+  /app/packages/twenty-server/dist/front/robots.txt
+COPY --chown=1000:1000 packages/twenty-front/public/sitemap.xml \
+  /app/packages/twenty-server/dist/front/sitemap.xml
+
 # Patch Open Graph and Twitter meta tags in the built index.html
 RUN set -eux; \
   INDEX=/app/packages/twenty-server/dist/front/index.html; \
-  sed -i 's|property="og:title" content="[^"]*"|property="og:title" content="Maninfini automation"|g' "$INDEX"; \
-  sed -i 's|name="twitter:title" content="[^"]*"|name="twitter:title" content="Maninfini automation"|g' "$INDEX"; \
-  sed -i 's|name="description" content="[^"]*"|name="description" content="A modern solution for business"|g' "$INDEX" || true; \
-  sed -i 's|property="og:description" content="[^"]*"|property="og:description" content="A modern solution for business"|g' "$INDEX"; \
-  sed -i 's|name="twitter:description" content="[^"]*"|name="twitter:description" content="A modern solution for business"|g' "$INDEX"; \
+  sed -i 's|property="og:title" content="[^"]*"|property="og:title" content="Maninfini Automation: Automation CRM for Your Business"|g' "$INDEX"; \
+  sed -i 's|name="twitter:title" content="[^"]*"|name="twitter:title" content="Maninfini Automation: Automation CRM for Your Business"|g' "$INDEX"; \
+  sed -i 's|name="description" content="[^"]*"|name="description" content="Automation CRM for your business."|g' "$INDEX" || true; \
+  sed -i 's|property="og:description" content="[^"]*"|property="og:description" content="Automation CRM for your business."|g' "$INDEX"; \
+  sed -i 's|name="twitter:description" content="[^"]*"|name="twitter:description" content="Automation CRM for your business."|g' "$INDEX"; \
   sed -i 's|property="og:image" content="[^"]*"|property="og:image" content="https://crm.maninfini.com/images/maninfini-logo.png"|g' "$INDEX"; \
   sed -i 's|name="twitter:image" content="[^"]*"|name="twitter:image" content="https://crm.maninfini.com/images/maninfini-logo.png"|g' "$INDEX";
 
-USER 1000
+# Ensure canonical and og:url point to the CRM subdomain
+RUN set -eux; \
+  INDEX=/app/packages/twenty-server/dist/front/index.html; \
+  sed -i 's|property="og:url" content="[^"]*"|property="og:url" content="https://crm.maninfini.com"|g' "$INDEX"; \
+  sed -i 's|rel="canonical" href="[^"]*"|rel="canonical" href="https://crm.maninfini.com"|g' "$INDEX";
 
+USER 1000
